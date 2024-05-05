@@ -1,45 +1,55 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'measure.dart';
+part of 'reminder.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MeasureAdapter extends TypeAdapter<Measure> {
+class ReminderAdapter extends TypeAdapter<Reminder> {
   @override
-  final int typeId = 0;
+  final int typeId = 2;
 
   @override
-  Measure read(BinaryReader reader) {
+  Reminder read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return Measure.tablets;
+        return Reminder.no;
       case 1:
-        return Measure.syrup;
+        return Reminder.thisInstant;
       case 2:
-        return Measure.capsule;
+        return Reminder.min5;
       case 3:
-        return Measure.injection;
+        return Reminder.min15;
+      case 4:
+        return Reminder.min30;
+      case 5:
+        return Reminder.hour1;
       default:
-        return Measure.tablets;
+        return Reminder.no;
     }
   }
 
   @override
-  void write(BinaryWriter writer, Measure obj) {
+  void write(BinaryWriter writer, Reminder obj) {
     switch (obj) {
-      case Measure.tablets:
+      case Reminder.no:
         writer.writeByte(0);
         break;
-      case Measure.syrup:
+      case Reminder.thisInstant:
         writer.writeByte(1);
         break;
-      case Measure.capsule:
+      case Reminder.min5:
         writer.writeByte(2);
         break;
-      case Measure.injection:
+      case Reminder.min15:
         writer.writeByte(3);
+        break;
+      case Reminder.min30:
+        writer.writeByte(4);
+        break;
+      case Reminder.hour1:
+        writer.writeByte(5);
         break;
     }
   }
@@ -50,7 +60,7 @@ class MeasureAdapter extends TypeAdapter<Measure> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MeasureAdapter &&
+      other is ReminderAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
