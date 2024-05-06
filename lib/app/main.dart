@@ -68,7 +68,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = CupertinoTheme.of(context);
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
@@ -102,9 +101,11 @@ class MainApp extends StatelessWidget {
                   builder: (context) => Scaffold(
                     body: CupertinoTabScaffold(
                       tabBar: CupertinoTabBar(
-                        backgroundColor: theme.brightness == Brightness.light
-                            ? theme.barBackgroundColor
-                            : theme.primaryContrastingColor,
+                        backgroundColor:
+                            CupertinoTheme.of(context).brightness ==
+                                    Brightness.light
+                                ? CupertinoTheme.of(context).barBackgroundColor
+                                : const Color.fromRGBO(28, 28, 30, 1),
                         items: <BottomNavigationBarItem>[
                           BottomNavigationBarItem(
                             icon: const Icon(CupertinoIcons.clock_fill),
@@ -116,7 +117,7 @@ class MainApp extends StatelessWidget {
                             activeIcon: SvgPicture.asset(
                               'assets/icons/medication.svg',
                               colorFilter: ColorFilter.mode(
-                                theme.primaryColor,
+                                CupertinoTheme.of(context).primaryColor,
                                 BlendMode.srcIn,
                               ),
                             ),
