@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:template/features/medications/controller/medication_list_cubit.dart';
-import 'package:template/features/medications/model/medication/medication.dart';
-import 'package:template/features/medications/view/sheet/medication_bottom_sheet.dart';
-import 'package:template/features/schedule/controller/schedule_list_cubit.dart';
+import 'package:medications/features/medications/controller/medication_list_cubit.dart';
+import 'package:medications/features/medications/model/medication/medication.dart';
+import 'package:medications/features/medications/view/sheet/medication_bottom_sheet.dart';
+import 'package:medications/features/schedule/controller/schedule_list_cubit.dart';
 
 Future<void> updateMedication(
     BuildContext context, Medication medication) async {

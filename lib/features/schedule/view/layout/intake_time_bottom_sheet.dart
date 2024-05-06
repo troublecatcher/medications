@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template/features/settings/locale_cubit.dart';
-import 'package:template/generated/l10n.dart';
+import 'package:medications/features/settings/locale_cubit.dart';
+import 'package:medications/generated/l10n.dart';
 
 class IntakeTimeBottomSheet extends StatelessWidget {
   const IntakeTimeBottomSheet({

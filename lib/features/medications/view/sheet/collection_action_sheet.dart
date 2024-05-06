@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template/features/settings/locale_cubit.dart';
+import 'package:medications/features/settings/locale_cubit.dart';
 
 class CollectionActionSheet extends StatelessWidget {
   final int currentIndex;

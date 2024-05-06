@@ -62,5 +62,6 @@
   "medication": "Medication",
   "dontForgetToTakeMedicationname": "Don't forget to take {medicationname}",
   "save": "Save",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "youHaveNotificationsDisabledForThisAppSoWeWont": "You have notifications disabled for this app, so we won't be able to notify you"
 }

@@ -5,14 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:template/features/settings/about_screen.dart';
-import 'package:template/features/settings/darkmode_cubit.dart';
-import 'package:template/features/settings/language_screen.dart';
-import 'package:template/features/settings/privacy_policy_screen.dart';
-import 'package:template/features/settings/question_screen.dart';
-import 'package:template/features/settings/terms_of_use_screen.dart';
-import 'package:template/generated/l10n.dart';
-import 'package:template/shared/base_screen.dart';
+import 'package:medications/features/settings/about_screen.dart';
+import 'package:medications/features/settings/darkmode_cubit.dart';
+import 'package:medications/features/settings/language_screen.dart';
+import 'package:medications/features/settings/privacy_policy_screen.dart';
+import 'package:medications/features/settings/question_screen.dart';
+import 'package:medications/features/settings/terms_of_use_screen.dart';
+import 'package:medications/generated/l10n.dart';
+import 'package:medications/shared/base_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});

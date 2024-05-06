@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:template/features/medications/controller/delete_medication.dart';
-import 'package:template/features/medications/model/measure/measure.dart';
-import 'package:template/features/medications/model/medication/medication.dart';
-import 'package:template/features/medications/view/sheet/collection_action_sheet.dart';
-import 'package:template/features/settings/locale_cubit.dart';
-import 'package:template/generated/l10n.dart';
-import 'package:template/shared/base_screen.dart';
+import 'package:medications/features/medications/controller/delete_medication.dart';
+import 'package:medications/features/medications/model/measure/measure.dart';
+import 'package:medications/features/medications/model/medication/medication.dart';
+import 'package:medications/features/medications/view/sheet/collection_action_sheet.dart';
+import 'package:medications/features/settings/locale_cubit.dart';
+import 'package:medications/generated/l10n.dart';
+import 'package:medications/shared/base_screen.dart';
 
 class MedicationBottomSheet extends StatefulWidget {
   final Medication? medication;

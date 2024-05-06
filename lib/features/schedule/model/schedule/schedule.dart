@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
-import 'package:template/features/medications/model/measure/measure.dart';
-import 'package:template/features/medications/model/medication/medication.dart';
-import 'package:template/features/schedule/model/reminder/reminder.dart';
+import 'package:medications/features/medications/model/measure/measure.dart';
+import 'package:medications/features/medications/model/medication/medication.dart';
+import 'package:medications/features/schedule/model/reminder/reminder.dart';
 
 part 'schedule.g.dart';
 

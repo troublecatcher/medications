@@ -1,14 +1,13 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template/app/main.dart';
-import 'package:template/features/schedule/model/schedule/schedule.dart';
-import 'package:template/shared/utils.dart';
+import 'package:medications/app/main.dart';
+import 'package:medications/features/schedule/model/schedule/schedule.dart';
+import 'package:medications/shared/utils.dart';
 
 class ScheduleListCubit extends Cubit<List<Schedule>> {
   ScheduleListCubit() : super([]) {
     read();
-    print(state);
   }
 
   void create(Schedule schedule) {
@@ -67,13 +66,4 @@ class ScheduleListCubit extends Cubit<List<Schedule>> {
       emit(updatedList);
     });
   }
-
-  // deleteAll(List<int> indexes) {
-  //   final List<Schedule> updatedList = List.from(state);
-  //   for (var index in indexes) {
-  //     scheduleBox.deleteAt(index);
-  //     updatedList.removeAt(index);
-  //   }
-  //   emit(updatedList);
-  // }
 }

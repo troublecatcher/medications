@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:template/features/medications/model/measure/measure.dart';
+import 'package:medications/features/medications/model/measure/measure.dart';
 
 part 'medication.g.dart';
 

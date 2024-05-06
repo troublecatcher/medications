@@ -689,6 +689,16 @@ class S {
       args: [],
     );
   }
+
+  /// `You have notifications disabled for this app, so we won't be able to notify you`
+  String get youHaveNotificationsDisabledForThisAppSoWeWont {
+    return Intl.message(
+      'You have notifications disabled for this app, so we won\'t be able to notify you',
+      name: 'youHaveNotificationsDisabledForThisAppSoWeWont',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

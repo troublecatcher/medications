@@ -4,16 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:template/app/service/notification_manager.dart';
-import 'package:template/features/schedule/controller/delete_schedule.dart';
-import 'package:template/features/schedule/model/reminder/reminder.dart';
-import 'package:template/features/schedule/model/schedule/schedule.dart';
-import 'package:template/features/schedule/view/layout/schedule_bottom_sheet.dart';
-import 'package:template/features/schedule/controller/schedule_list_cubit.dart';
-import 'package:template/features/settings/locale_cubit.dart';
-import 'package:template/generated/l10n.dart';
-import 'package:template/shared/dismissible_bin.dart';
-import 'package:template/shared/utils.dart';
+import 'package:medications/app/service/notification_manager.dart';
+import 'package:medications/features/schedule/controller/delete_schedule.dart';
+import 'package:medications/features/schedule/model/reminder/reminder.dart';
+import 'package:medications/features/schedule/model/schedule/schedule.dart';
+import 'package:medications/features/schedule/view/layout/schedule_bottom_sheet.dart';
+import 'package:medications/features/schedule/controller/schedule_list_cubit.dart';
+import 'package:medications/features/settings/locale_cubit.dart';
+import 'package:medications/generated/l10n.dart';
+import 'package:medications/shared/dismissible_bin.dart';
+import 'package:medications/shared/utils.dart';
 
 class ScheduleWidget extends StatelessWidget {
   final Schedule schedule;

@@ -2,9 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:template/app/service/firebase_options.dart';
-import 'package:template/app/service/notification_manager.dart';
-import 'package:template/app/service/remote_config_service.dart';
+import 'package:medications/app/service/firebase_options.dart';
+import 'package:medications/app/service/notification_manager.dart';
+import 'package:medications/app/service/remote_config_service.dart';
 
 Future<void> initDI() async {
   final getIt = GetIt.I;

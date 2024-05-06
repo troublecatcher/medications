@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:template/features/medications/model/medication/medication.dart';
-import 'package:template/features/medications/controller/medication_list_cubit.dart';
-import 'package:template/features/medications/view/layout/active_medications.dart';
-import 'package:template/features/medications/view/layout/all_medications.dart';
-import 'package:template/features/medications/view/layout/completed_medications.dart';
-import 'package:template/features/medications/view/sheet/medication_bottom_sheet.dart';
-import 'package:template/features/schedule/controller/schedule_list_cubit.dart';
-import 'package:template/features/schedule/model/schedule/schedule.dart';
-import 'package:template/generated/l10n.dart';
-import 'package:template/shared/base_screen.dart';
+import 'package:medications/features/medications/model/medication/medication.dart';
+import 'package:medications/features/medications/controller/medication_list_cubit.dart';
+import 'package:medications/features/medications/view/layout/active_medications.dart';
+import 'package:medications/features/medications/view/layout/all_medications.dart';
+import 'package:medications/features/medications/view/layout/completed_medications.dart';
+import 'package:medications/features/medications/view/sheet/medication_bottom_sheet.dart';
+import 'package:medications/features/schedule/controller/schedule_list_cubit.dart';
+import 'package:medications/features/schedule/model/schedule/schedule.dart';
+import 'package:medications/generated/l10n.dart';
+import 'package:medications/shared/base_screen.dart';
 
 class MedicationsScreen extends StatefulWidget {
   const MedicationsScreen({super.key});

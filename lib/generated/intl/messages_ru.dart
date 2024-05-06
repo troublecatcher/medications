@@ -113,6 +113,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "topicOfTheQuestion":
             MessageLookupByLibrary.simpleMessage("Тема вопроса"),
         "versionVersion": m3,
+        "youHaveNotificationsDisabledForThisAppSoWeWont":
+            MessageLookupByLibrary.simpleMessage(
+                "Уведомления отключены для этого приложения, так что мы не сможем вам напомнить"),
         "yourMessage": MessageLookupByLibrary.simpleMessage("Ваше сообщение"),
         "yourQuestionHasBeenSuccessfullySent":
             MessageLookupByLibrary.simpleMessage(

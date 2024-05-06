@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template/features/medications/controller/update_medication.dart';
-import 'package:template/features/medications/model/medication/medication.dart';
-import 'package:template/features/medications/view/widget/no_medication_widget.dart';
-import 'package:template/features/medications/view/widget/medication_widget.dart';
-import 'package:template/generated/l10n.dart';
+import 'package:medications/features/medications/controller/update_medication.dart';
+import 'package:medications/features/medications/model/medication/medication.dart';
+import 'package:medications/features/medications/view/widget/no_medication_widget.dart';
+import 'package:medications/features/medications/view/widget/medication_widget.dart';
+import 'package:medications/generated/l10n.dart';
 
 class ActiveMedications extends StatelessWidget {
   final List<Medication> activeList;

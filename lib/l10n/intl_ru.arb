@@ -62,5 +62,6 @@
   "medication": "Лекарства",
   "dontForgetToTakeMedicationname": "Не забудьте принять {medicationname}",
   "save": "Сохранить",
-  "cancel": "Отмена"
+  "cancel": "Отмена",
+  "youHaveNotificationsDisabledForThisAppSoWeWont": "Уведомления отключены для этого приложения, так что мы не сможем вам напомнить"
 }

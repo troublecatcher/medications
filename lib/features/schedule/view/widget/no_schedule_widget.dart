@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template/generated/l10n.dart';
+import 'package:medications/generated/l10n.dart';
 
 class NoScheduleWidget extends StatelessWidget {
   const NoScheduleWidget({

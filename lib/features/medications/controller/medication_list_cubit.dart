@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template/app/main.dart';
-import 'package:template/features/medications/model/medication/medication.dart';
+import 'package:medications/app/main.dart';
+import 'package:medications/features/medications/model/medication/medication.dart';
 
 class MedicationListCubit extends Cubit<List<Medication>> {
   MedicationListCubit() : super([]) {

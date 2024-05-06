@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:template/features/schedule/model/schedule/schedule.dart';
-import 'package:template/shared/utils.dart';
+import 'package:medications/features/schedule/model/schedule/schedule.dart';
+import 'package:medications/shared/utils.dart';
 import 'package:timezone/data/latest_all.dart' as tz1;
 import 'package:timezone/timezone.dart' as tz;
 

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template/features/schedule/model/schedule/schedule.dart';
-import 'package:template/features/schedule/view/widget/schedule_widget.dart';
+import 'package:medications/features/schedule/model/schedule/schedule.dart';
+import 'package:medications/features/schedule/view/widget/schedule_widget.dart';
 
 class ScheduleSection extends StatelessWidget {
   final String title;

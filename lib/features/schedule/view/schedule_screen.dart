@@ -5,16 +5,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:template/app/service/notification_manager.dart';
-import 'package:template/features/schedule/model/reminder/reminder.dart';
-import 'package:template/features/schedule/model/schedule/schedule.dart';
-import 'package:template/features/schedule/view/layout/schedule_builder.dart';
-import 'package:template/features/schedule/view/layout/schedule_bottom_sheet.dart';
-import 'package:template/features/schedule/controller/schedule_list_cubit.dart';
-import 'package:template/features/settings/locale_cubit.dart';
-import 'package:template/generated/l10n.dart';
-import 'package:template/shared/base_screen.dart';
-import 'package:template/shared/utils.dart';
+import 'package:medications/app/service/notification_manager.dart';
+import 'package:medications/features/schedule/model/reminder/reminder.dart';
+import 'package:medications/features/schedule/model/schedule/schedule.dart';
+import 'package:medications/features/schedule/view/layout/schedule_builder.dart';
+import 'package:medications/features/schedule/view/layout/schedule_bottom_sheet.dart';
+import 'package:medications/features/schedule/controller/schedule_list_cubit.dart';
+import 'package:medications/features/settings/locale_cubit.dart';
+import 'package:medications/generated/l10n.dart';
+import 'package:medications/shared/base_screen.dart';
+import 'package:medications/shared/utils.dart';
 
 class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({super.key});
@@ -35,30 +35,30 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           CupertinoSliverNavigationBar(
             transitionBetweenRoutes: false,
             largeTitle: Text(S.of(context).schedule),
-            leading: Row(
-              children: [
-                CupertinoButton(
-                  padding: EdgeInsets.zero,
-                  child: const Text('check'),
-                  onPressed: () async {
-                    final pendingNotificationRequests =
-                        await GetIt.I<NotificationManager>()
-                            .plugin
-                            .pendingNotificationRequests();
-                    for (var element in pendingNotificationRequests) {
-                      print(element.id);
-                    }
-                  },
-                ),
-                CupertinoButton(
-                  padding: EdgeInsets.zero,
-                  child: const Text('clear'),
-                  onPressed: () async {
-                    await GetIt.I<NotificationManager>().plugin.cancelAll();
-                  },
-                ),
-              ],
-            ),
+            // leading: Row(
+            //   children: [
+            //     CupertinoButton(
+            //       padding: EdgeInsets.zero,
+            //       child: const Text('check'),
+            //       onPressed: () async {
+            //         final pendingNotificationRequests =
+            //             await GetIt.I<NotificationManager>()
+            //                 .plugin
+            //                 .pendingNotificationRequests();
+            //         for (var element in pendingNotificationRequests) {
+            //           print(element.id);
+            //         }
+            //       },
+            //     ),
+            //     CupertinoButton(
+            //       padding: EdgeInsets.zero,
+            //       child: const Text('clear'),
+            //       onPressed: () async {
+            //         await GetIt.I<NotificationManager>().plugin.cancelAll();
+            //       },
+            //     ),
+            //   ],
+            // ),
             trailing: CupertinoButton(
               padding: EdgeInsets.zero,
               child: Text(S.of(context).add),

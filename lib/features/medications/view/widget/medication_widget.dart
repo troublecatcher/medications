@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:template/features/medications/controller/delete_medication.dart';
-import 'package:template/features/medications/model/medication/medication.dart';
-import 'package:template/features/medications/controller/medication_list_cubit.dart';
-import 'package:template/features/settings/locale_cubit.dart';
-import 'package:template/shared/dismissible_bin.dart';
+import 'package:medications/features/medications/controller/delete_medication.dart';
+import 'package:medications/features/medications/model/medication/medication.dart';
+import 'package:medications/features/medications/controller/medication_list_cubit.dart';
+import 'package:medications/features/settings/locale_cubit.dart';
+import 'package:medications/shared/dismissible_bin.dart';
 
 class MedicationWidget extends StatelessWidget {
   final int index;

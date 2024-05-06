@@ -58,6 +58,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '445310082592',
     projectId: 'medications-1ea0e',
     storageBucket: 'medications-1ea0e.appspot.com',
-    iosBundleId: 'com.example.template',
+    iosBundleId: 'com.example.medications',
   );
 }

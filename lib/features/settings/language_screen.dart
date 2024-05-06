@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:template/features/settings/locale_cubit.dart';
-import 'package:template/generated/l10n.dart';
-import 'package:template/shared/base_screen.dart';
+import 'package:medications/features/settings/locale_cubit.dart';
+import 'package:medications/generated/l10n.dart';
+import 'package:medications/shared/base_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class LanguageScreen extends StatelessWidget {

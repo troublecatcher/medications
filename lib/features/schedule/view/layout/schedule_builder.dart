@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template/features/schedule/controller/schedule_list_cubit.dart';
-import 'package:template/features/schedule/model/schedule/schedule.dart';
-import 'package:template/features/schedule/view/widget/no_schedule_widget.dart';
-import 'package:template/features/schedule/view/layout/schedule_section.dart';
-import 'package:template/features/schedule/view/widget/schedule_widget.dart';
-import 'package:template/generated/l10n.dart';
-import 'package:template/shared/utils.dart';
+import 'package:medications/features/schedule/controller/schedule_list_cubit.dart';
+import 'package:medications/features/schedule/model/schedule/schedule.dart';
+import 'package:medications/features/schedule/view/widget/no_schedule_widget.dart';
+import 'package:medications/features/schedule/view/layout/schedule_section.dart';
+import 'package:medications/features/schedule/view/widget/schedule_widget.dart';
+import 'package:medications/generated/l10n.dart';
+import 'package:medications/shared/utils.dart';
 
 class ScheduleBuilder extends StatelessWidget {
   const ScheduleBuilder({
