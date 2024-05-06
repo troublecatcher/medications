@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:template/features/schedule/model/reminder/reminder.dart';
 import 'package:template/features/schedule/model/schedule/schedule.dart';
-import 'package:template/generated/l10n.dart';
 import 'package:template/shared/utils.dart';
 import 'package:timezone/data/latest_all.dart' as tz1;
 import 'package:timezone/timezone.dart' as tz;
@@ -28,7 +27,6 @@ class NotificationManager {
   Future<void> schedule(Schedule schedule, String title, String body) async {
     for (int intakeTime in schedule.intakeTimesInMinutes) {
       final timeOfDay = deserializeTimeOfDay(intakeTime);
-
       DateTime currentDate = schedule.startDate
           .copyWith(hour: timeOfDay.hour, minute: timeOfDay.minute);
       final endDate = schedule.endDate!
@@ -36,7 +34,7 @@ class NotificationManager {
 
       while (currentDate.isBefore(endDate)) {
         final id = await genId();
-        final neededDateTime = DateTime(
+        DateTime neededDateTime = DateTime(
           currentDate.year,
           currentDate.month,
           currentDate.day,
@@ -45,23 +43,18 @@ class NotificationManager {
         ).subtract(
           Duration(minutes: schedule.reminder.minutesToBeSubtracted),
         );
-        final now = DateTime.now();
-        final a = neededDateTime.isBefore(now);
-        if (a) {
-          print(neededDateTime);
-          neededDateTime.add(const Duration(days: 1));
-          print(neededDateTime);
-        }
-        await _plugin.zonedSchedule(
-          id,
-          title,
-          body,
-          tz.TZDateTime.from(neededDateTime, tz.local),
-          const NotificationDetails(),
-          uiLocalNotificationDateInterpretation:
-              UILocalNotificationDateInterpretation.absoluteTime,
-          payload: schedule.id.toString(),
-        );
+        try {
+          await _plugin.zonedSchedule(
+            id,
+            title,
+            body,
+            tz.TZDateTime.from(neededDateTime, tz.local),
+            const NotificationDetails(),
+            uiLocalNotificationDateInterpretation:
+                UILocalNotificationDateInterpretation.absoluteTime,
+            payload: schedule.id.toString(),
+          );
+        } catch (_) {}
         currentDate = currentDate.add(const Duration(days: 1));
       }
     }
@@ -82,20 +75,19 @@ class NotificationManager {
       ).subtract(
         Duration(minutes: schedule.reminder.minutesToBeSubtracted),
       );
-      if (neededDateTime.isBefore(DateTime.now())) {
-        neededDateTime.add(const Duration(days: 1));
-      }
-      await _plugin.zonedSchedule(
-        id,
-        title,
-        body,
-        tz.TZDateTime.from(neededDateTime, tz.local),
-        const NotificationDetails(),
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime,
-        matchDateTimeComponents: DateTimeComponents.time,
-        payload: schedule.id.toString(),
-      );
+      try {
+        await _plugin.zonedSchedule(
+          id,
+          title,
+          body,
+          tz.TZDateTime.from(neededDateTime, tz.local),
+          const NotificationDetails(),
+          uiLocalNotificationDateInterpretation:
+              UILocalNotificationDateInterpretation.absoluteTime,
+          matchDateTimeComponents: DateTimeComponents.time,
+          payload: schedule.id.toString(),
+        );
+      } catch (_) {}
     }
   }
 

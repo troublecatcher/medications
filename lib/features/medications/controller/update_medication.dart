@@ -9,6 +9,7 @@ import 'package:template/features/schedule/controller/schedule_list_cubit.dart';
 Future<void> updateMedication(
     BuildContext context, Medication medication) async {
   Medication? newMedication = await showCupertinoModalBottomSheet(
+    enableDrag: false,
     expand: true,
     context: context,
     builder: (context) => MedicationBottomSheet(medication: medication),

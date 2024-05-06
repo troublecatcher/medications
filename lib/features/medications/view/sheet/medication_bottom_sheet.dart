@@ -245,11 +245,12 @@ class _MedicationBottomSheetState extends State<MedicationBottomSheet> {
               if (widget.medication != null)
                 CupertinoButton(
                   child: Text(S.of(context).deleteMedication),
-                  onPressed: () {
-                    deleteMedication(context, widget.medication!);
+                  onPressed: () async {
+                    await deleteMedication(context, widget.medication!);
                     Navigator.of(context).pop();
                   },
                 ),
+              const SizedBox(height: 32),
             ],
           ),
         ),

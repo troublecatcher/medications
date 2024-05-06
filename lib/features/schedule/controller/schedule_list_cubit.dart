@@ -1,36 +1,14 @@
-import 'dart:async';
-
+import 'dart:math';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:template/app/main.dart';
 import 'package:template/features/schedule/model/schedule/schedule.dart';
+import 'package:template/shared/utils.dart';
 
 class ScheduleListCubit extends Cubit<List<Schedule>> {
-  late Timer _timer;
-
   ScheduleListCubit() : super([]) {
     read();
-    _startTimer();
-  }
-
-  void _startTimer() {
-    _timer = Timer.periodic(const Duration(minutes: 1), (timer) {
-      final now = DateTime.now();
-      final updatedList = List<Schedule>.from(state);
-      for (int i = updatedList.length - 1; i >= 0; i--) {
-        if (updatedList[i].endDate != null &&
-            updatedList[i].endDate!.isBefore(now)) {
-          updatedList.removeAt(i);
-        }
-      }
-      emit(updatedList);
-    });
-  }
-
-  @override
-  Future<void> close() async {
-    // Cancel the timer when the cubit is closed
-    _timer.cancel();
-    super.close();
+    print(state);
   }
 
   void create(Schedule schedule) {
@@ -39,13 +17,36 @@ class ScheduleListCubit extends Cubit<List<Schedule>> {
     });
   }
 
-  void read() {
+  read() async {
     List<Schedule> scheduleList = [];
     if (scheduleBox.isNotEmpty) {
+      List<int> garbageIds = [];
       for (var i = 0; i < scheduleBox.length; i++) {
-        scheduleList.add(scheduleBox.getAt(i)!);
+        final schedule = scheduleBox.getAt(i)!;
+        final endDate = schedule.endDate;
+        if (endDate != null) {
+          final int lastIntakeTimeInMinutes =
+              schedule.intakeTimesInMinutes.reduce(max);
+          final TimeOfDay lastIntakeTime = deserializeTimeOfDay(
+            lastIntakeTimeInMinutes,
+          );
+          final DateTime lastIntake = DateTime(
+            endDate.year,
+            endDate.month,
+            endDate.day,
+            lastIntakeTime.hour,
+            lastIntakeTime.minute,
+          );
+          if (lastIntake.isBefore(DateTime.now())) {
+            garbageIds.add(i);
+          }
+        }
+        scheduleList.add(schedule);
       }
       emit(scheduleList);
+      for (final i in garbageIds) {
+        delete(i);
+      }
     } else {
       emit([]);
     }
@@ -66,4 +67,13 @@ class ScheduleListCubit extends Cubit<List<Schedule>> {
       emit(updatedList);
     });
   }
+
+  // deleteAll(List<int> indexes) {
+  //   final List<Schedule> updatedList = List.from(state);
+  //   for (var index in indexes) {
+  //     scheduleBox.deleteAt(index);
+  //     updatedList.removeAt(index);
+  //   }
+  //   emit(updatedList);
+  // }
 }

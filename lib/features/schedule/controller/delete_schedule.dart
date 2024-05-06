@@ -6,7 +6,8 @@ import 'package:template/features/schedule/controller/schedule_list_cubit.dart';
 import 'package:template/features/schedule/model/schedule/schedule.dart';
 
 deleteSchedule(BuildContext context, Schedule schedule) {
-  final index = context.read<ScheduleListCubit>().state.indexOf(schedule);
+  final cubit = context.read<ScheduleListCubit>();
+  final index = cubit.state.indexOf(schedule);
   GetIt.I<NotificationManager>().cancel(schedule);
-  context.read<ScheduleListCubit>().delete(index);
+  cubit.delete(index);
 }

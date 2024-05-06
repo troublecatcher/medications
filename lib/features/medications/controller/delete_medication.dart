@@ -8,11 +8,11 @@ import 'package:template/features/schedule/controller/schedule_list_cubit.dart';
 Future<void> deleteMedication(
     BuildContext context, Medication medication) async {
   final medicationCubit = context.read<MedicationListCubit>();
-  final scheduleCubit = context.read<ScheduleListCubit>();
+  final schedules = context.read<ScheduleListCubit>().state;
   medicationCubit.delete(medicationCubit.state.indexOf(medication));
-  for (final schedule in scheduleCubit.state) {
-    if (schedule.medication == medication) {
-      deleteSchedule(context, schedule);
+  for (var i = schedules.length - 1; i >= 0; i--) {
+    if (schedules[i].medication == medication) {
+      deleteSchedule(context, schedules[i]);
     }
   }
 }

@@ -36,10 +36,10 @@ class MedicationWidget extends StatelessWidget {
             child: Dismissible(
               background: const DismissibleBin(),
               direction: DismissDirection.endToStart,
-              onDismissed: (_) {
-                deleteMedication(context, medication);
+              onDismissed: (_) async {
+                await deleteMedication(context, medication);
               },
-              key: ValueKey(index),
+              key: UniqueKey(),
               child: CupertinoListTile.notched(
                 onTap: onTap,
                 leadingSize: 60,

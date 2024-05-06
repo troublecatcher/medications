@@ -29,6 +29,10 @@ class ScheduleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = CupertinoTheme.of(context);
     final medication = schedule.medication;
+    final cubit = context.read<ScheduleListCubit>();
+    final title = S.of(context).reminder;
+    final body =
+        S.of(context).dontForgetToTakeMedicationname(schedule.medication.name);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Dismissible(
@@ -41,58 +45,61 @@ class ScheduleWidget extends StatelessWidget {
             color: theme.primaryContrastingColor,
             borderRadius: BorderRadius.circular(10),
           ),
-          child: CupertinoListTile.notched(
-            additionalInfo: Text(
-              formatTimeOfDay(timeOfDay),
-              style: theme.textTheme.textStyle.copyWith(
-                fontWeight: FontWeight.bold,
-                color: theme.primaryColor,
-              ),
-            ),
-            onTap: () async {
-              Schedule? newSchedule = await showCupertinoModalBottomSheet(
-                expand: true,
-                context: context,
-                builder: (context) => ScheduleBottomSheet(schedule: schedule),
-              );
-              if (newSchedule != null) {
-                final index =
-                    context.read<ScheduleListCubit>().state.indexOf(schedule);
-                context.read<ScheduleListCubit>().update(index, newSchedule);
-                GetIt.I<NotificationManager>().cancel(schedule);
-                if (newSchedule.reminder != Reminder.no) {
-                  if (newSchedule.endDate != null) {
-                    GetIt.I<NotificationManager>().schedule(
-                      newSchedule,
-                      S.of(context).reminder,
-                      S.of(context).dontForgetToTakeMedicationname(
-                          schedule.medication.name),
-                    );
-                  } else {
-                    GetIt.I<NotificationManager>().scheduleRecurring(
-                      newSchedule,
-                      S.of(context).reminder,
-                      S.of(context).dontForgetToTakeMedicationname(
-                          schedule.medication.name),
-                    );
+          child: BlocBuilder<LocaleCubit, String>(
+            builder: (context, state) {
+              return CupertinoListTile.notched(
+                additionalInfo: Text(
+                  formatTimeOfDay(timeOfDay, state),
+                  style: theme.textTheme.textStyle.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: theme.primaryColor,
+                  ),
+                ),
+                onTap: () async {
+                  Schedule? newSchedule = await showCupertinoModalBottomSheet(
+                    enableDrag: false,
+                    expand: true,
+                    context: context,
+                    builder: (context) =>
+                        ScheduleBottomSheet(schedule: schedule),
+                  );
+                  if (newSchedule != null) {
+                    final index = cubit.state.indexOf(schedule);
+                    cubit.update(index, newSchedule);
+                    GetIt.I<NotificationManager>().cancel(schedule);
+                    if (newSchedule.reminder != Reminder.no) {
+                      if (newSchedule.endDate != null) {
+                        GetIt.I<NotificationManager>().schedule(
+                          newSchedule,
+                          title,
+                          body,
+                        );
+                      } else {
+                        GetIt.I<NotificationManager>().scheduleRecurring(
+                          newSchedule,
+                          title,
+                          body,
+                        );
+                      }
+                    }
                   }
-                }
-              }
+                },
+                leadingSize: 60,
+                leading: Image.asset(
+                  'assets/imgs/${medication.iconIndex}.png',
+                  width: 42.r,
+                  height: 42.r,
+                ),
+                title: Text(medication.name),
+                subtitle: BlocBuilder<LocaleCubit, String>(
+                  builder: (context, state) {
+                    return Text(
+                        '${schedule.amount} ${state == 'ru' ? schedule.measure.titleRU : schedule.measure.titleEN}');
+                  },
+                ),
+                trailing: const CupertinoListTileChevron(),
+              );
             },
-            leadingSize: 60,
-            leading: Image.asset(
-              'assets/imgs/${medication.iconIndex}.png',
-              width: 42.r,
-              height: 42.r,
-            ),
-            title: Text(medication.name),
-            subtitle: BlocBuilder<LocaleCubit, String>(
-              builder: (context, state) {
-                return Text(
-                    '${schedule.amount} ${state == 'ru' ? schedule.measure.titleRU : schedule.measure.titleEN}');
-              },
-            ),
-            trailing: const CupertinoListTileChevron(),
           ),
         ),
       ),

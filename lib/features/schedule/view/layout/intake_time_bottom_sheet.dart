@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:template/features/settings/locale_cubit.dart';
 import 'package:template/generated/l10n.dart';
 
 class IntakeTimeBottomSheet extends StatelessWidget {
@@ -47,10 +49,15 @@ class IntakeTimeBottomSheet extends StatelessWidget {
           ),
           Expanded(
             flex: 3,
-            child: CupertinoDatePicker(
-              mode: CupertinoDatePickerMode.time,
-              onDateTimeChanged: (value) =>
-                  intakeTime = TimeOfDay.fromDateTime(value),
+            child: BlocBuilder<LocaleCubit, String>(
+              builder: (context, state) {
+                return CupertinoDatePicker(
+                  mode: CupertinoDatePickerMode.time,
+                  use24hFormat: state == 'ru',
+                  onDateTimeChanged: (value) =>
+                      intakeTime = TimeOfDay.fromDateTime(value),
+                );
+              },
             ),
           ),
         ],

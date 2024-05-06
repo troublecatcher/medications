@@ -52,6 +52,7 @@ class _MedicationsScreenState extends State<MedicationsScreen> {
               child: Text(S.of(context).add),
               onPressed: () async {
                 Medication? medication = await showCupertinoModalBottomSheet(
+                  enableDrag: false,
                   expand: true,
                   context: context,
                   builder: (context) => const MedicationBottomSheet(),
@@ -80,16 +81,18 @@ class _MedicationsScreenState extends State<MedicationsScreen> {
                 ),
                 initialValue: page,
                 children: {
-                  0: Text(
-                    S.of(context).all,
-                    style: TextStyle(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.bold,
-                      color: page == 0
-                          ? Colors.white
-                          : theme.brightness == Brightness.dark
-                              ? Colors.white
-                              : Colors.black,
+                  0: FittedBox(
+                    child: Text(
+                      S.of(context).all,
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.bold,
+                        color: page == 0
+                            ? Colors.white
+                            : theme.brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.black,
+                      ),
                     ),
                   ),
                   1: FittedBox(

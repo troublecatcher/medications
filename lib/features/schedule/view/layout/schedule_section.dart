@@ -6,12 +6,12 @@ import 'package:template/features/schedule/view/widget/schedule_widget.dart';
 
 class ScheduleSection extends StatelessWidget {
   final String title;
-  final Map<TimeOfDay, Schedule> schedules;
+  final List<ScheduleWidget> scheduleWidgets;
 
   const ScheduleSection({
     super.key,
     required this.title,
-    required this.schedules,
+    required this.scheduleWidgets,
   });
 
   @override
@@ -30,17 +30,14 @@ class ScheduleSection extends StatelessWidget {
           ),
         ),
         SizedBox(height: 8.h),
-        ...schedules.entries.map((entry) {
-          final timeOfDay = entry.key;
-          final schedule = entry.value;
-          return Padding(
-            padding: EdgeInsets.only(bottom: 8.h),
-            child: ScheduleWidget(
-              schedule: schedule,
-              timeOfDay: timeOfDay,
-            ),
-          );
-        }).toList(),
+        ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: scheduleWidgets.length,
+          itemBuilder: (context, index) => scheduleWidgets[index],
+          separatorBuilder: (context, index) => SizedBox(height: 8.h),
+        ),
+        SizedBox(height: 8.h),
       ],
     );
   }

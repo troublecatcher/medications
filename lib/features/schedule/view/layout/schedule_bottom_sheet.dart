@@ -13,7 +13,7 @@ import 'package:template/features/schedule/model/schedule/schedule.dart';
 import 'package:template/features/medications/controller/medication_list_cubit.dart';
 import 'package:template/features/medications/view/widget/medication_widget.dart';
 import 'package:template/features/medications/view/sheet/collection_action_sheet.dart';
-import 'package:template/features/medications/view/sheet/intake_time_bottom_sheet.dart';
+import 'package:template/features/schedule/view/layout/intake_time_bottom_sheet.dart';
 import 'package:template/features/settings/locale_cubit.dart';
 import 'package:template/generated/l10n.dart';
 import 'package:template/shared/base_screen.dart';
@@ -88,13 +88,25 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
   }
 
   bool formValid() {
-    return amountController.text.isNotEmpty && intakeTimes.isNotEmpty;
+    final amount = amountController.text;
+    bool additionalCondition = true;
+    if (!doesNotEnd) {
+      if (endDate.isBefore(startDate)) {
+        additionalCondition = false;
+      }
+    }
+    return amount.isNotEmpty &&
+        (int.tryParse(amount) != null || double.tryParse(amount) != null) &&
+        intakeTimes.isNotEmpty &&
+        additionalCondition;
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = CupertinoTheme.of(context);
+    final locale = context.read<LocaleCubit>().state;
     return BaseScreen(
+      bottom: false,
       backgroundColor: theme.brightness == Brightness.dark
           ? theme.primaryContrastingColor
           : theme.scaffoldBackgroundColor,
@@ -132,7 +144,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
               ? () async => Navigator.of(context).pop(
                     Schedule(
                       medication: currentMedication!,
-                      amount: double.parse(amountController.text),
+                      amount: num.parse(amountController.text),
                       measure: Measure.values[measure],
                       startDate: startDate,
                       endDate: doesNotEnd ? null : endDate,
@@ -224,15 +236,11 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
                           Text(S.of(context).measure),
                           Row(
                             children: [
-                              BlocBuilder<LocaleCubit, String>(
-                                builder: (context, state) {
-                                  return Text(
-                                    toBeginningOfSentenceCase(state == 'ru'
-                                        ? Measure.values[measure].titleRU
-                                        : Measure.values[measure].titleEN)!,
-                                    style: TextStyle(color: theme.primaryColor),
-                                  );
-                                },
+                              Text(
+                                toBeginningOfSentenceCase(locale == 'ru'
+                                    ? Measure.values[measure].titleRU
+                                    : Measure.values[measure].titleEN)!,
+                                style: TextStyle(color: theme.primaryColor),
                               ),
                               const SizedBox(width: 8),
                               const Icon(
@@ -257,7 +265,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(S.of(context).starts),
-                          Text(DateFormat('MMM d, yyyy').format(startDate)),
+                          Text(formatDate(startDate, locale)),
                         ],
                       ),
                     ),
@@ -288,7 +296,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(S.of(context).ends),
-                            Text(DateFormat('MMM d, yyyy').format(endDate)),
+                            Text(formatDate(endDate, locale)),
                           ],
                         ),
                       ),
@@ -347,6 +355,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
                               Text(
                                 formatTimeOfDay(
                                   deserializeTimeOfDay(intakeTime),
+                                  locale,
                                 ),
                               ),
                             ],
@@ -358,9 +367,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
                       builder: (context) {
                         if (intakeTimes.isEmpty) {
                           return CupertinoListTile(
-                            onTap: () async {
-                              await addTimeOfDay(context);
-                            },
+                            onTap: () async => await addTimeOfDay(context),
                             title: Text(
                               S.of(context).addTimeOfIntake,
                               style: TextStyle(color: theme.primaryColor),
@@ -368,9 +375,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
                           );
                         } else {
                           return CupertinoListTile(
-                            onTap: () async {
-                              await addTimeOfDay(context);
-                            },
+                            onTap: () async => await addTimeOfDay(context),
                             title: Text(
                               S.of(context).addMore,
                               style: TextStyle(color: theme.primaryColor),
@@ -400,34 +405,30 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
                           });
                         }
                       },
-                      title: BlocBuilder<LocaleCubit, String>(
-                        builder: (context, state) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(S.of(context).reminder),
+                          Row(
                             children: [
-                              Text(S.of(context).reminder),
-                              Row(
-                                children: [
-                                  Text(
-                                    toBeginningOfSentenceCase(state == 'ru'
-                                        ? Reminder.values[reminderIndex].titleRU
-                                        : Reminder
-                                            .values[reminderIndex].titleEN)!,
-                                    style: TextStyle(color: theme.primaryColor),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  const Icon(
-                                    CupertinoIcons.chevron_up_chevron_down,
-                                  ),
-                                ],
+                              Text(
+                                toBeginningOfSentenceCase(locale == 'ru'
+                                    ? Reminder.values[reminderIndex].titleRU
+                                    : Reminder.values[reminderIndex].titleEN)!,
+                                style: TextStyle(color: theme.primaryColor),
+                              ),
+                              const SizedBox(width: 8),
+                              const Icon(
+                                CupertinoIcons.chevron_up_chevron_down,
                               ),
                             ],
-                          );
-                        },
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
+                const SizedBox(height: 37),
               ],
             ),
           ),
@@ -446,13 +447,5 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
         intakeTimes.add(serializeTimeOfDay(newIntakeTime));
       });
     }
-  }
-
-  String formatTimeOfDay(TimeOfDay timeOfDay) {
-    final now = DateTime.now();
-    final dateTime = DateTime(
-        now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
-    final formatter = DateFormat.jm();
-    return formatter.format(dateTime);
   }
 }

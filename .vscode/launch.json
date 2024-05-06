@@ -23,6 +23,35 @@
             "type": "dart",
             "flutterMode": "release",
             "program": "lib/app/main.dart",
+        },
+        {
+            "name": "iPhone SE",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "EC996FC3-FF2D-4EF4-B995-A3EE162EAAB2",
+            "program": "lib/app/main.dart",
+        },
+        {
+            "name": "iPhone 15 Pro Max",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "26DD3FC5-8FA7-42CB-97EC-123CEA321BA6",
+            "program": "lib/app/main.dart",
+        },
+        {
+            "name": "iPad",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "43C3FDB7-C6B2-440D-8D12-EEFC66AF9DF3",
+            "program": "lib/app/main.dart",
+        },
+    ],
+    "compounds": [
+        {
+            "name": "All devices",
+            "configurations": [
+                "iPhone 15 Pro Max","iPad","iPhone SE"
+            ]
         }
-    ]
+        ]
 }

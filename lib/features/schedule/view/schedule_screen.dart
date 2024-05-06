@@ -9,11 +9,9 @@ import 'package:template/app/service/notification_manager.dart';
 import 'package:template/features/schedule/model/reminder/reminder.dart';
 import 'package:template/features/schedule/model/schedule/schedule.dart';
 import 'package:template/features/schedule/view/layout/schedule_builder.dart';
-import 'package:template/features/schedule/view/widget/no_schedule_widget.dart';
-import 'package:template/features/schedule/view/layout/schedule_section.dart';
-import 'package:template/features/schedule/view/widget/schedule_widget.dart';
 import 'package:template/features/schedule/view/layout/schedule_bottom_sheet.dart';
 import 'package:template/features/schedule/controller/schedule_list_cubit.dart';
+import 'package:template/features/settings/locale_cubit.dart';
 import 'package:template/generated/l10n.dart';
 import 'package:template/shared/base_screen.dart';
 import 'package:template/shared/utils.dart';
@@ -66,6 +64,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               child: Text(S.of(context).add),
               onPressed: () async {
                 Schedule? schedule = await showCupertinoModalBottomSheet(
+                  enableDrag: false,
                   expand: true,
                   context: context,
                   builder: (context) => const ScheduleBottomSheet(),
@@ -121,35 +120,39 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                     .primaryContrastingColor,
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                DateFormat('E').format(day)[0],
-                                style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: condition
-                                      ? Colors.white
-                                      : CupertinoTheme.of(context).brightness ==
-                                              Brightness.light
-                                          ? Colors.black
-                                          : Colors.white,
+                          child: FittedBox(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  DateFormat('E').format(day)[0],
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
+                                    color: condition
+                                        ? Colors.white
+                                        : CupertinoTheme.of(context)
+                                                    .brightness ==
+                                                Brightness.light
+                                            ? Colors.black
+                                            : Colors.white,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                day.day.toString(),
-                                style: TextStyle(
-                                  fontSize: 19.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: condition
-                                      ? Colors.white
-                                      : CupertinoTheme.of(context).brightness ==
-                                              Brightness.light
-                                          ? Colors.black
-                                          : Colors.white,
+                                Text(
+                                  day.day.toString(),
+                                  style: TextStyle(
+                                    fontSize: 19.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: condition
+                                        ? Colors.white
+                                        : CupertinoTheme.of(context)
+                                                    .brightness ==
+                                                Brightness.light
+                                            ? Colors.black
+                                            : Colors.white,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -173,16 +176,18 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                       color: CupertinoColors.systemGrey,
                     ),
                   ),
-                  Text(
-                    toBeginningOfSentenceCase(DateFormat('EEEE, MMMM d').format(
-                      DateTime.now().add(
-                        Duration(days: selection),
-                      ),
-                    ))!,
-                    style: theme.textTheme.textStyle.copyWith(
-                      fontSize: 19.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  BlocBuilder<LocaleCubit, String>(
+                    builder: (context, state) {
+                      return Text(
+                        toBeginningOfSentenceCase(formatDateWithWeekday(
+                            DateTime.now().add(Duration(days: selection)),
+                            state))!,
+                        style: theme.textTheme.textStyle.copyWith(
+                          fontSize: 19.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
